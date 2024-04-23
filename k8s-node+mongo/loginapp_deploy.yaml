@@ -16,13 +16,16 @@ spec:
     spec:
       containers:
       - name: nodeapp
-        image: vidyadhar7/nodejs:7
+        image: k8sregistry0090.azurecr.io/loginapp:1.0.0
         ports:
           - containerPort: 7500
         env:
-        - name: MONGO_URL
-          #value: mongodb://mongo:27017
-	  value: mongo.helm-deployment.svc.cluster.local
+        - name: MONGO_DB_USERNAME
+          value: devdb
+        - name: MONGO_DB_PASSWORD
+          value: devdb@123
+        - name: MONGO_DB_HOSTNAME
+          value: mongo 
         resources:
           limits:
             cpu: "1"
@@ -30,3 +33,4 @@ spec:
           requests:
             cpu: "500m"
             memory: "500Mi"
+      

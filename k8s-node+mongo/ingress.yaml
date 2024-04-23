@@ -1,13 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: loginapp-ingress
-  annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/scheme: internet-facing
+  name: minimal-ingress
+  namespace: test
 spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - manoharnunna.co.in
+      secretName: login-tls-secret
   rules:
-    - http:
+    - host: manoharnunna.co.in
+      http:
         paths:
           - path: /
             pathType: Prefix
@@ -16,3 +20,4 @@ spec:
                 name: login-app
                 port:
                   number: 80
+
